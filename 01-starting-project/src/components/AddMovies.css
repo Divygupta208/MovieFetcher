@@ -1,0 +1,19 @@
+.add-movie {
+  display: block;
+  flex-direction: column;
+  background-color: #fff;
+  margin-top: 20px;
+  margin-left: 27vw;
+  border-radius: 20px;
+  width: 45vw;
+  height: 50vh;
+}
+.form {
+  padding: 30px;
+}
+.form input {
+  border-radius: 10px;
+  width: 40vw;
+  padding: 10px;
+  margin: 20px 20px;
+}
