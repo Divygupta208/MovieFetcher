@@ -1,17 +1,19 @@
 import React, { useRef } from "react";
 import "./AddMovies.css";
-const AddMovies = () => {
+const AddMovies = (props) => {
   const nameRef = useRef();
   const openingRef = useRef();
   const dateRef = useRef();
 
-  const addMovieHandler = (event) => {
+  const onAddMovie = (event) => {
     event.preventDefault();
     const newMovieObj = {
-      name: nameRef.current.value,
-      opening: openingRef.current.value,
-      date: dateRef.current.value,
+      title: nameRef.current.value,
+      openingText: openingRef.current.value,
+      releaseDate: dateRef.current.value,
     };
+
+    props.addMovieHandler(newMovieObj);
 
     nameRef.current.value = "";
     openingRef.current.value = "";
@@ -33,7 +35,7 @@ const AddMovies = () => {
         <label htmlFor="date">Release Date</label>
         <input type="date" id="date" ref={dateRef} />
 
-        <button onClick={addMovieHandler}>Add Movie</button>
+        <button onClick={onAddMovie}>Add Movie</button>
       </form>
     </div>
   );
