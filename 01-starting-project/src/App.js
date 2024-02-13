@@ -80,9 +80,36 @@ function App() {
 
       const data = await response.json();
 
+      fetchMovieHandler();
+
       console.log("Movie added successfully:", data);
     } catch (error) {
       console.error("Error adding movie:", error.message);
+    }
+  };
+
+  const deleteMovieHandler = async (id) => {
+    console.log(id);
+    try {
+      const response = await fetch(
+        `https://react-http-7951f-default-rtdb.firebaseio.com/movies/${id}.json`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`failed to delete movie. Status : ${response.status}`);
+      }
+
+      fetchMovieHandler();
+
+      console.log("Successfully deleted");
+    } catch (error) {
+      console.error("Error Deleting Movies", error.message);
     }
   };
 
@@ -95,7 +122,9 @@ function App() {
   };
 
   if (movies.length > 0) {
-    content = <MoviesList movies={movies} />;
+    content = (
+      <MoviesList movies={movies} deleteMovieHandler={deleteMovieHandler} />
+    );
   }
   if (error) {
     content = (
